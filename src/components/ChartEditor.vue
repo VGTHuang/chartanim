@@ -1,7 +1,7 @@
 <template>
     <div id="chart-editor-ctn">
         <div id="panels-canvas-ctn">
-            <HeaderPanel></HeaderPanel>
+            <HeaderPanel :projectName="as"></HeaderPanel>
             <main id="chart-editor-main">
                 <LeftPanel></LeftPanel>
             </main>
@@ -20,6 +20,12 @@ export default {
         HeaderPanel,
         LeftPanel,
         FooterPanel
+    },
+    
+    data: function() {
+        return {
+            as: "asd"
+        }
     }
 }
 </script>

@@ -10,24 +10,19 @@
                 </ul>
             </div>
             <div id="lp-main-bd">
-                <div class="lp-main-item">
-                    <h3>Item1</h3>
-                    <div>content is asdfasdf</div>
-                </div>
-                <div class="lp-main-item">
-                    <h3>Item2</h3>
-                    <div>some other item</div>
-                </div>
+                <DataPanel></DataPanel>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import DataPanel from "./DataPanel.vue";
 
 export default {
     name: "LeftPanel",
     components: {
+        DataPanel
     },
     data: function() {
         return {
@@ -35,7 +30,8 @@ export default {
             lpShow: true,
             lpSelected: 0,
             lpOptions: {
-                "lp_option_elements": {img: require("../assets/lp_option_elements.svg"), comp: "Comp2", selected: true},
+                "lp_option_data": {img: require("../assets/lp_option_elements.svg"), comp: "Comp2", selected: true},
+                "lp_option_elements": {img: require("../assets/lp_option_elements.svg"), comp: "Comp2", selected: false},
                 "lp_option_grid": {img: require("../assets/lp_option_grid.svg"), comp: "Comp1", selected: false},
                 "lp_option_animation": {img: require("../assets/lp_option_animation.svg"), comp: "Comp3", selected: false},
                 "lp_option_export": {img: require("../assets/lp_option_export.svg"), comp: "Comp4", selected: false}
@@ -112,17 +108,22 @@ export default {
         box-sizing: border-box;
         float: left;
         height: 100%;
-        width: 230px;
+        min-width: 200px;
         padding: 0 5px 0;
         background: $dgrey;
-        .lp-main-item {
-            border-bottom: 1px solid $mgrey;
-            padding: 10px 0 10px;
-            h1, h2, h3 {
-                margin: 0;
-                font-size: 1em;
-            }
-        }
+    }
+}
+/deep/ .lp-main-item {
+    border-bottom: 1px solid $mgrey;
+    padding: 5px 0 5px;
+    h1, h2, h3 {
+        margin: 0;
+        font-size: 1.1em;
+    }
+    h4 {
+        margin: 0;
+        font-size: 1em;
+        color: $lgrey;
     }
 }
 </style>
