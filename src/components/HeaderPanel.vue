@@ -16,12 +16,14 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
     name: "HeaderPanel",
-    components: {
-    },
-    props: {
-        projectName: String
+    computed: {
+        ...mapState({
+            projectName: state => state.projectName
+        }),
     }
 }
 </script>
@@ -48,16 +50,15 @@ export default {
 #hp-proj-name {
     color: $lgr;
     margin-left: .5em;
-    transform: translateY(-2px);
-    #hp-proj-b {
-        margin: 0;
-        font-size: 1.3em;
-        font-weight: bold;
-        letter-spacing: .2em;
-        background: #00000090;
-        background-clip: text;
-        color: transparent;
-        text-shadow: $lgr 0px 2px 1px;
-    }
+}
+#hp-proj-b {
+    margin: 0;
+    font-size: 1.3em;
+    font-weight: bold;
+    letter-spacing: .2em;
+    color: $lgr;
+    color: transparent;
+    text-shadow:   0 0 1px $lgr, -1px -1px 1px $xdgrey, 1px 1px 1px $xlgrey;
+
 }
 </style>

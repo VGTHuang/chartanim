@@ -16,11 +16,9 @@ const store = new Vuex.Store({
         animStyle: {},
     },
     mutations: {
-        /*
-        increment (state) {
-        state.count++
+        setProjectName: (state, val) => {
+            state.projectName = val;
         }
-        */
     }
 });
 

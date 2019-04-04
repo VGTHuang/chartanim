@@ -10,7 +10,9 @@
                 </ul>
             </div>
             <div id="lp-main-bd">
-                <DataPanel></DataPanel>
+                <keep-alive>
+                    <component v-bind:is="lpCurrentPanel"></component>
+                </keep-alive>
             </div>
         </div>
     </div>
@@ -18,11 +20,13 @@
 
 <script>
 import DataPanel from "./DataPanel.vue";
+import DataPanel1 from "./DataPanel1.vue";
 
 export default {
     name: "LeftPanel",
     components: {
-        DataPanel
+        DataPanel,
+        DataPanel1
     },
     data: function() {
         return {
@@ -30,12 +34,13 @@ export default {
             lpShow: true,
             lpSelected: 0,
             lpOptions: {
-                "lp_option_data": {img: require("../assets/lp_option_elements.svg"), comp: "Comp2", selected: true},
-                "lp_option_elements": {img: require("../assets/lp_option_elements.svg"), comp: "Comp2", selected: false},
-                "lp_option_grid": {img: require("../assets/lp_option_grid.svg"), comp: "Comp1", selected: false},
-                "lp_option_animation": {img: require("../assets/lp_option_animation.svg"), comp: "Comp3", selected: false},
-                "lp_option_export": {img: require("../assets/lp_option_export.svg"), comp: "Comp4", selected: false}
-            }
+                "lp_option_data": {img: require("../assets/lp_option_elements.svg"), comp: "DataPanel", selected: true},
+                "lp_option_elements": {img: require("../assets/lp_option_elements.svg"), comp: "DataPanel1", selected: false},
+                "lp_option_grid": {img: require("../assets/lp_option_grid.svg"), comp: "DataPanel", selected: false},
+                "lp_option_animation": {img: require("../assets/lp_option_animation.svg"), comp: "DataPanel", selected: false},
+                "lp_option_export": {img: require("../assets/lp_option_export.svg"), comp: "DataPanel", selected: false}
+            },
+            lpCurrentPanel: "DataPanel"
         }
     },
     methods: {
@@ -53,6 +58,7 @@ export default {
                 this.lpOptions[key].selected = false;
             }
             this.lpOptions[cur].selected = true;
+            this.lpCurrentPanel = this.lpOptions[cur].comp;
         }
     }
 }
@@ -80,8 +86,8 @@ export default {
 #lp-main {
     background: $ddgrey;
     max-width: 350px;
+    display: flex;
     #lp-main-ic {
-        float: left;
         ul {
             list-style: none;
             margin: 0;
@@ -105,25 +111,56 @@ export default {
         }
     }
     #lp-main-bd {
-        box-sizing: border-box;
         float: left;
         height: 100%;
         min-width: 200px;
-        padding: 0 5px 0;
+        padding: 0 10px 0;
         background: $dgrey;
+        border-right: 1px solid $mgrey;
     }
 }
 /deep/ .lp-main-item {
     border-bottom: 1px solid $mgrey;
-    padding: 5px 0 5px;
+    padding: 10px 0 10px;
     h1, h2, h3 {
         margin: 0;
         font-size: 1.1em;
     }
     h4 {
-        margin: 0;
+        margin: 0 0 5px;
         font-size: 1em;
         color: $lgrey;
+        &:before {
+            content: "";
+            display: inline-block;
+            height: 8px;
+            width: 8px;
+            border-radius: 50%;
+            margin-right: 5px;
+            background: $xlgrey;
+        }
+    }
+    input[type=text] {
+        border: 1px solid $lgrey;
+        height: 1.7em;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    table {
+        margin: 10px 0 10px;
+        background: #fff;
+        color: black;
+        border-collapse: collapse;
+        th, td {
+            box-sizing: border-box;
+            border: 1px solid $dgrey;
+            font-family: monospace;
+            min-width: 3em;
+        }
+        border: 1px solid $dgrey;
+    }
+    p {
+        font-size: .9em;
     }
 }
 </style>

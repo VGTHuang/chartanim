@@ -12,12 +12,13 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
+@import "./scss/_variables.scss";
 
 #footer-panel-ctn {
     width: 100%;
     height: 1.5em;
-    background: #006ec8;
+    background: $dgr;
     color: white;
     font-size: .9em;
 }
