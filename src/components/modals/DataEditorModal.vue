@@ -17,14 +17,14 @@
                 </div>
             </div>
             <div class="lp-main-item">
-                <select id="select-time">
+                <select id="select-time" v-model="isTimestamped">
                     <option value="1">timestamped</option>
                     <option value="2">non-timestamped</option>
                 </select>
                 <div ref="tableDisplayEdit"></div>
                 <div ref="tableValidityCtn">{{dataValidityMsg}}</div>
                 <button class="basic-btn" :disabled="!isDataValid">confirm</button>
-                <button class="basic-btn alert-btn">clear table</button>
+                <button class="basic-btn alert-btn" @click="clearTable">clear table</button>
             </div>
         </div>
     </modal>
@@ -33,6 +33,7 @@
 <script>
 import readXlsxFile from "read-excel-file";
 import {validateTable} from "../../assets/js/methods.js";
+import { mapState } from "vuex";
 
 export default {
     name: "DataEditorModal",
@@ -41,12 +42,16 @@ export default {
             file: "",
             rows: "",
             table: "",
-            isDataValid: true
+            isDataValid: true,
         }
     },
     computed: {
         dataValidityMsg() {
             return this.isDataValid?"valid data":"invalid data";
+        },
+        isTimestamped: {
+            get() { return this.$store.state.tableParams.isTimestamped; },
+            set(val) { this.$store.commit("setTimestampedStatus", val) }
         }
     },
     methods: {
@@ -60,6 +65,9 @@ export default {
             }).catch((err) => {
                 this.$refs.tableDisplayEdit.innerHTML = `<div class="alert">Incorrect format; only support .xlsx format</div>`
             });
+        },
+        clearTable: function() {
+            console.log(this.isTimestamped);
         }
     }
 }

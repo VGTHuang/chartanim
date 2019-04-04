@@ -7,7 +7,10 @@ const store = new Vuex.Store({
     state: {
         projectName: "Project 1",
         // spreadsheet data in given format
-        sheetData: {},
+        tableParams: {
+            isTimestamped: 1,
+            tableData: {}
+        },
         // general style
         chartStyle: {},
         // grid style
@@ -18,6 +21,9 @@ const store = new Vuex.Store({
     mutations: {
         setProjectName: (state, val) => {
             state.projectName = val;
+        },
+        setTimestampedStatus: (state, stat) => {
+            state.tableParams.isTimestamped = stat;
         }
     }
 });
