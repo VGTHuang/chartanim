@@ -1,5 +1,7 @@
 # chartanim
 
+This is a project under construction.
+
 ## Project setup
 ```
 npm install
