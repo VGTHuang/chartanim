@@ -8,8 +8,38 @@ const store = new Vuex.Store({
         projectName: "Project 1",
         // spreadsheet data in given format
         tableParams: {
-            isTimestamped: 1,
-            tableData: {}
+            isTimestamped: true,
+            timeCount: 5,
+            contentCount: 3,
+            timestamps: ["2005", "2008", "2009", "2012", "2015"],
+            contents: [
+                {name: "Apple", properties: {}, records: [6,7,4,3,5]},
+                {name: "Pear", properties: {}, records: [3,5,6,2.9,5]},
+                {name: "Banana", properties: {}, records: [6,5,4,2,3.4]},
+            ],
+            tableData: [
+                {
+                    title: "a",
+                    pro: {},
+                    data: [1,2,3]
+                },
+                {
+                    title: "b",
+                    pro: {},
+                    data: [4,5,6]
+                },
+                {
+                    title: "c",
+                    pro: {},
+                    data: [7,8,9]
+                },
+            ]
+        },
+        chartParams: {
+            layout: {
+                chartWidth: 600,
+                chartHeight: 400,
+            }
         },
         // general style
         chartStyle: {},

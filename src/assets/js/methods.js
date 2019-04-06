@@ -1,4 +1,4 @@
-function validateTable(tbobj) {
+export function validateTable(tbobj) {
     var dom = "<table>";
     var valid = "class=\"valid-data\"";
     var invalid = "class=\"invalid-data\"";
@@ -22,5 +22,3 @@ function validateTable(tbobj) {
     dom += "</tbody></table>";
     return {table: dom, validStatus: isValid};
 }
-
-export {validateTable};

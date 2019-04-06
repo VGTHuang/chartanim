@@ -20,13 +20,13 @@
 
 <script>
 import DataPanel from "./DataPanel.vue";
-import DataPanel1 from "./DataPanel1.vue";
+import TestPanel from "./TestPanel.vue";
 
 export default {
     name: "LeftPanel",
     components: {
         DataPanel,
-        DataPanel1
+        TestPanel
     },
     data: function() {
         return {
@@ -35,10 +35,10 @@ export default {
             lpSelected: 0,
             lpOptions: {
                 "lp_option_data": {img: require("../assets/lp_option_elements.svg"), comp: "DataPanel", selected: true},
-                "lp_option_elements": {img: require("../assets/lp_option_elements.svg"), comp: "DataPanel1", selected: false},
-                "lp_option_grid": {img: require("../assets/lp_option_grid.svg"), comp: "DataPanel", selected: false},
-                "lp_option_animation": {img: require("../assets/lp_option_animation.svg"), comp: "DataPanel", selected: false},
-                "lp_option_export": {img: require("../assets/lp_option_export.svg"), comp: "DataPanel", selected: false}
+                "lp_option_elements": {img: require("../assets/lp_option_elements.svg"), comp: "TestPanel", selected: false},
+                "lp_option_grid": {img: require("../assets/lp_option_grid.svg"), comp: "TestPanel", selected: false},
+                "lp_option_animation": {img: require("../assets/lp_option_animation.svg"), comp: "TestPanel", selected: false},
+                "lp_option_export": {img: require("../assets/lp_option_export.svg"), comp: "TestPanel", selected: false}
             },
             lpCurrentPanel: "DataPanel"
         }

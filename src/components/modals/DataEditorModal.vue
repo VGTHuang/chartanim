@@ -1,7 +1,6 @@
 <template>
     <modal name="data-editor-modal"
-    :scrollable="true"
-    height="auto"
+    height="600"
     width="650"
     >
         <div class="custom-modal">
@@ -17,11 +16,13 @@
                 </div>
             </div>
             <div class="lp-main-item">
-                <select id="select-time" v-model="isTimestamped">
-                    <option value="1">timestamped</option>
-                    <option value="2">non-timestamped</option>
-                </select>
-                <div ref="tableDisplayEdit"></div>
+                <form>
+                    <input name="change-ts" type="radio" @change="changeTimestamp(true)" checked>timestamped
+                    <input name="change-ts" type="radio" @change="changeTimestamp(false)">non-timestamped
+                </form>
+                <div ref="tableDisplayAndEdit">
+                    <DataTable @click="console.log(123)" :editable="false" :isTimestamped="isTimestamped"/>
+                </div>
                 <div ref="tableValidityCtn">{{dataValidityMsg}}</div>
                 <button class="basic-btn" :disabled="!isDataValid">confirm</button>
                 <button class="basic-btn alert-btn" @click="clearTable">clear table</button>
@@ -32,11 +33,14 @@
 
 <script>
 import readXlsxFile from "read-excel-file";
+import DataTable from "../DataTable.vue";
 import {validateTable} from "../../assets/js/methods.js";
-import { mapState } from "vuex";
 
 export default {
     name: "DataEditorModal",
+    components: {
+        DataTable
+    },
     data: function() {
         return {
             file: "",
@@ -52,22 +56,17 @@ export default {
         isTimestamped: {
             get() { return this.$store.state.tableParams.isTimestamped; },
             set(val) { this.$store.commit("setTimestampedStatus", val) }
-        }
+        },
     },
     methods: {
         handleFileUpload: function() {
-            this.file = this.$refs.submitFile.files[0];
-            readXlsxFile(this.file).then((rows) => {
-                this.rows = rows;
-                var validateReturn = validateTable(rows);
-                this.$refs.tableDisplayEdit.innerHTML = validateReturn.table;
-                this.isDataValid = validateReturn.validStatus;
-            }).catch((err) => {
-                this.$refs.tableDisplayEdit.innerHTML = `<div class="alert">Incorrect format; only support .xlsx format</div>`
-            });
+            console.log("file uploaded");
+        },
+        changeTimestamp: function(value) {
+            this.isTimestamped = value;
         },
         clearTable: function() {
-            console.log(this.isTimestamped);
+
         }
     }
 }

@@ -1,9 +1,10 @@
 <template>
     <div id="chart-editor-ctn">
         <div id="panels-canvas-ctn">
-            <HeaderPanel></HeaderPanel>
+            <HeaderPanel />
             <main id="chart-editor-main">
-                <LeftPanel></LeftPanel>
+                <LeftPanel />
+                <CenterPanel />
             </main>
             <FooterPanel>footer</FooterPanel>
         </div>
@@ -14,11 +15,13 @@
 import HeaderPanel from "./HeaderPanel.vue";
 import LeftPanel from "./LeftPanel.vue";
 import FooterPanel from "./FooterPanel.vue";
+import CenterPanel from "./CenterPanel.vue";
 
 export default {
     components: {
         HeaderPanel,
         LeftPanel,
+        CenterPanel,
         FooterPanel
     },
     
@@ -47,7 +50,7 @@ export default {
 }
 #chart-editor-main {
     flex: 1;
-    background: $xdgrey;
+    background: $ddgrey;
     display: flex;
 }
 // general

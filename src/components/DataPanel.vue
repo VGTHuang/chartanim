@@ -15,32 +15,7 @@
         <h4>Table</h4>
         <button class="basic-btn" @click="showSyntax()">syntax guidance</button>
         <button class="basic-btn" @click="showDataEditor()">open data editor</button>
-        <table>
-            <thead>
-                <tr>
-                    <th>asda</th>
-                    <th>rtue</th>
-                    <th>uewe</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>123</td>
-                    <td>456</td>
-                    <td>789</td>
-                </tr>
-                <tr>
-                    <td>123</td>
-                    <td>456</td>
-                    <td>789</td>
-                </tr>
-                <tr>
-                    <td>123</td>
-                    <td>456</td>
-                    <td>789</td>
-                </tr>
-            </tbody>
-        </table>
+        <DataTable @click="console.log(123)" :editable="false" :isTimestamped="isTimestamped"/>
     </div>
 </div>
 </template>
@@ -48,13 +23,15 @@
 <script>
 import SheetSyntaxModal from "./modals/SheetSyntaxModal.vue";
 import DataEditorModal from "./modals/DataEditorModal.vue";
+import DataTable from "./DataTable.vue";
 import { mapState } from "vuex";
 
 export default {
     name: "DataPanel",
     components: {
         SheetSyntaxModal,
-        DataEditorModal
+        DataEditorModal,
+        DataTable
     },
     data: function() {
         return {
@@ -63,7 +40,9 @@ export default {
     },
     computed: {
         ...mapState({
-            projectName: state => state.projectName
+            projectName: state => state.projectName,
+            tableData: state =>state.tableParams.tableData,
+            isTimestamped: state => state.tableParams.isTimestamped
         }),
         pname: {
             set(val) {
