@@ -4,18 +4,22 @@
     <SheetSyntaxModal/>
     <DataEditorModal/>
 
-    <div class="lp-main-item">
-        <h3>Data Editor</h3>
+    <div class="msg-ctn">
+        <div class="lt-basic msg-row">Data editor</div>
     </div>
-    <div class="lp-main-item">
-        <h4>Project Name</h4>
-        <input type="text" v-model="pname">
+    <div class="msg-ctn">
+        <div class="mt-basic msg-row">Project Name</div>
+        <input type="text" v-model="pname" class="msg-row">
     </div>
-    <div class="lp-main-item">
-        <h4>Table</h4>
-        <button class="basic-btn" @click="showSyntax()">syntax guidance</button>
-        <button class="basic-btn" @click="showDataEditor()">open data editor</button>
-        <DataTable @click="console.log(123)" :editable="false" :isTimestamped="isTimestamped"/>
+    <div class="msg-ctn">
+        <div class="mt-basic msg-row">Table</div>
+        <div class="msg-row msg-row-center">
+            <button class="btn-basic" @click="showSyntax()">syntax guidance</button>
+            <button class="btn-basic" @click="showDataEditor()">open data editor</button>
+        </div>
+        <div class="msg-row msg-row-center">
+            <DataTable :editable="false" :isTimestamped="isTimestamped"/>
+        </div>
     </div>
 </div>
 </template>
@@ -63,7 +67,3 @@ export default {
     }
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

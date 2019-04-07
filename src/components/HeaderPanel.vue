@@ -1,16 +1,19 @@
 <template>
-    <div id="top-panel-ctn" class="basic-panel">
+    <div id="top-panel-ctn" class="panel-basic panel-border-b">
         <div id="hp-left">
-            <div id="hp-proj-name" class="basic-span"><span id="hp-proj-b">CHARTANIM</span>/ {{projectName}}</div>
-            <div class="basic-vr"></div>
+            <div id="hp-proj-name"><span id="hp-proj-b" class="span-wide">CHARTANIM</span>/ {{projectName}}</div>
+            
             <div id="hp-create-btn">
-                <button class="basic-btn basic-span">Create/Edit Your Data</button>
+                <button class="btn-basic span-wide">Create/Edit Your Data</button>
             </div>
-            <div><span class="basic-span">OR</span></div>
+            <div><span class="msg-basic span-wide">OR</span></div>
             <div id="hp-upload-btn">
-                <button class="basic-btn basic-span">Import Local File</button>
-                <span class="basic-info basic-span">File path here</span>
+                <button class="btn-basic span-wide">Import Local File</button>
+                <span class="msg-basic">File path here</span>
             </div>
+        </div>
+        <div id="hp-right">
+            <div class="msg-basic msg-s span-wide"><i>VGTHuang on GitHub</i></div>
         </div>
     </div>
 </template>
@@ -37,11 +40,9 @@ export default {
     height: 2.5em;
     padding: 0;
     display: flex;
-    -ms-flex-direction: row;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid $mgrey;
     #hp-left {
         display: flex;
         align-items: center;
@@ -59,6 +60,8 @@ export default {
     color: $lgr;
     color: transparent;
     text-shadow:   0 0 1px $lgr, -1px -1px 1px $xdgrey, 1px 1px 1px $xlgrey;
-
+}
+.span-wide {
+    margin: 0 10px;
 }
 </style>

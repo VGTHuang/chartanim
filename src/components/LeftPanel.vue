@@ -1,7 +1,7 @@
 <template>
-    <div id="left-panel-ctn">
-        <div id="lp-toggle-bar" @click="ccc">{{lpToggleIcon}}</div>
-        <div id="lp-main" v-show="lpShow">
+    <div id="left-panel-ctn" class="panel-basic">
+        <div id="lp-toggle-bar" class="panel-basic panel-border-r" @click="ccc">{{lpToggleIcon}}</div>
+        <div id="lp-main" v-show="lpShow" class="panel-basic">
             <div id="lp-main-ic">
                 <ul>
                     <li v-for="(value, key) in lpOptions" :key="key" :class="{selected: value.selected}" @click="switchOptions(key)">
@@ -9,7 +9,7 @@
                     </li>
                 </ul>
             </div>
-            <div id="lp-main-bd">
+            <div id="lp-main-bd" class="panel-basic panel-border-r">
                 <keep-alive>
                     <component v-bind:is="lpCurrentPanel"></component>
                 </keep-alive>
@@ -73,25 +73,22 @@ export default {
 }
 #lp-toggle-bar {
     height: 100%;
-    background: $dgrey;
-    border-right: 1px solid $mgrey;
     width: .9em;
     display: flex;
     align-items: center;
     text-align: center;
-    text-shadow: -1px -2px 0 $dgrey;
     user-select: none;
     cursor: pointer;
 }
 #lp-main {
-    background: $ddgrey;
-    max-width: 350px;
     display: flex;
     #lp-main-ic {
         ul {
             list-style: none;
             margin: 0;
             padding:0;
+            height: 100%;
+            background: $ddgrey;
             li {
                 margin: 10px 0 10px;
                 height: 50px;
@@ -113,54 +110,8 @@ export default {
     #lp-main-bd {
         float: left;
         height: 100%;
-        min-width: 200px;
-        padding: 0 10px 0;
-        background: $dgrey;
-        border-right: 1px solid $mgrey;
-    }
-}
-/deep/ .lp-main-item {
-    border-bottom: 1px solid $mgrey;
-    padding: 10px 0 10px;
-    h1, h2, h3 {
-        margin: 0;
-        font-size: 1.1em;
-    }
-    h4 {
-        margin: 0 0 5px;
-        font-size: 1em;
-        color: $lgrey;
-        &:before {
-            content: "";
-            display: inline-block;
-            height: 8px;
-            width: 8px;
-            border-radius: 50%;
-            margin-right: 5px;
-            background: $xlgrey;
-        }
-    }
-    input[type=text] {
-        border: 1px solid $lgrey;
-        height: 1.7em;
-        width: 100%;
-        box-sizing: border-box;
-    }
-    table {
-        margin: 10px 0 10px;
-        background: #fff;
-        color: black;
-        border-collapse: collapse;
-        th, td {
-            box-sizing: border-box;
-            border: 1px solid $dgrey;
-            font-family: monospace;
-            min-width: 3em;
-        }
-        border: 1px solid $dgrey;
-    }
-    p {
-        font-size: .9em;
+        width: 280px;
+        padding: 0;
     }
 }
 </style>

@@ -4,12 +4,12 @@
     height="auto"
     width="650"
     >
-        <div class="custom-modal">
-            <div class="lp-main-item">
-                <h1>Allowed syntax for your data set</h1>
+        <div class="custom-modal panel-basic">
+            <div class="msg-ctn">
+                <div class="lt-basic msg-row">Allowed syntax for your data set</div>
             </div>
-            <div class="lp-main-item">
-                <div class="basic-info">
+            <div class="msg-ctn">
+                <div class="msg-basic msg-row">
                     <ol>
                         <li>One single row of heading must be present.</li>
                         <li>In a timestamped table, the first column contains timestamps for each row of record. Formats of the timestamps should conform to these following types:
@@ -25,11 +25,11 @@
                     </ol>
                 </div>
             </div>
-            <div class="lp-main-item">
-                <h4>Example for timestamped table</h4>
-                <div class="chart-center">
-                    <div>U.S. imports of total dairy products (million dollar)</div>
-                    <table>
+            <div class="msg-ctn">
+                <div class="lt-basic msg-row">Example for timestamped table</div>
+                <div class="msg-row msg-row-col-center">
+                    <div class="mt-basic msg-row">U.S. imports of total dairy products (million dollar)</div>
+                    <table class="msg-row">
                         <thead>
                             <tr><th>year</th><th>ITALY</th><th>NEW ZEALAND</th><th>FRANCE</th><th>IRELAND</th><th>CANADA</th><th>SPAIN</th><th>NETHERLANDS</th><th>MEXICO</th><th>REST OF WORLD</th></tr>
                             </thead>
@@ -55,15 +55,14 @@
                             <tr><td>2017</td><td>304.4</td><td>286.7</td><td>183.6</td><td>146.0</td><td>110.9</td><td>97.5</td><td>97.1</td><td>88.4</td><td>512.5</td></tr>
                         </tbody>
                     </table>
-                    <div class="annotation">Source: https://www.ers.usda.gov/data-products/us-food-imports.aspx</div>
+                    <div class="msg-basic msg-s msg-row">Source: https://www.ers.usda.gov/data-products/us-food-imports.aspx</div>
                 </div>
             </div>
-            <div class="lp-main-item">
-                <h4>Example for non-timestamped table</h4>
-                <p>This is how it looks like:</p>
-                <div class="chart-center">
-                    <div>U.S. imports of total dairy products (million dollar)</div>
-                    <table>
+            <div class="msg-ctn">
+                <div class="lt-basic msg-row">Example for non-timestamped table</div>
+                <div class="msg-row msg-row-col-center">
+                    <div class="mt-basic msg-row">U.S. imports of total dairy products (million dollar)</div>
+                    <table class="msg-row">
                         <thead>
                             <tr><th>ITALY</th><th>NEW ZEALAND</th><th>FRANCE</th><th>IRELAND</th><th>CANADA</th><th>SPAIN</th><th>NETHERLANDS</th><th>MEXICO</th><th>REST OF WORLD</th></tr>
                             </thead>
@@ -89,7 +88,7 @@
                             <tr><td>304.4</td><td>286.7</td><td>183.6</td><td>146.0</td><td>110.9</td><td>97.5</td><td>97.1</td><td>88.4</td><td>512.5</td></tr>
                         </tbody>
                     </table>
-                    <div class="annotation">Source: https://www.ers.usda.gov/data-products/us-food-imports.aspx</div>
+                    <div class="msg-basic msg-s msg-row">Source: https://www.ers.usda.gov/data-products/us-food-imports.aspx</div>
                 </div>
             </div>
         </div>

@@ -3,29 +3,31 @@
     height="600"
     width="650"
     >
-        <div class="custom-modal">
-            <div class="lp-main-item">
-                <h1>Data editor</h1>
+        <div class="custom-modal panel-basic">
+            <div class="msg-ctn">
+                <div class="lt-basic msg-row">Data editor</div>
             </div>
-            <div class="lp-main-item">
-                <h4>Open an existing file</h4>
-                <div id="dropZone" ref="dropZone">Drop your .xlsx file here<br/>(only the first sheet will be processed)</div>
-                <div>
+            <div class="msg-ctn">
+                <div class="mt-basic msg-row">Open an existing file</div>
+                <div id="dropZone" class="msg-row" ref="dropZone">Drop your .xlsx file here<br/>(only the first sheet will be processed)</div>
+                <div class="msg-row">
                     or
                     <input type="file" id="submitFile" ref="submitFile" @change="handleFileUpload"/>
                 </div>
             </div>
-            <div class="lp-main-item">
-                <form>
+            <div class="msg-ctn">
+                <form class="msg-row msg-row-center">
                     <input name="change-ts" type="radio" @change="changeTimestamp(true)" checked>timestamped
                     <input name="change-ts" type="radio" @change="changeTimestamp(false)">non-timestamped
                 </form>
                 <div ref="tableDisplayAndEdit">
                     <DataTable @click="console.log(123)" :editable="false" :isTimestamped="isTimestamped"/>
                 </div>
-                <div ref="tableValidityCtn">{{dataValidityMsg}}</div>
-                <button class="basic-btn" :disabled="!isDataValid">confirm</button>
-                <button class="basic-btn alert-btn" @click="clearTable">clear table</button>
+                <div class="msg-basic msg-s msg-alert msg-row" ref="tableValidityCtn">{{dataValidityMsg}}</div>
+                <div class="msg-row msg-row-center">
+                    <button class="btn-basic" :disabled="!isDataValid">confirm</button>
+                    <button class="btn-basic btn-alert" @click="clearTable">clear table</button>
+                </div>
             </div>
         </div>
     </modal>
