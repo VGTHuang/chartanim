@@ -110,16 +110,23 @@ export default {
 
     // a single row of message
     .msg-row {
-        margin: 5px 0;
+        margin: 8px 0;
     }
     .msg-row-center {
         display: flex;
         justify-content: center;
     }
+    .msg-row-space-between {
+        display: flex;
+        justify-content: space-between;
+    }
     .msg-row-col-center {
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
+    label {
+        margin-right: 5px;
     }
 
     // table
