@@ -1,7 +1,7 @@
 <template>
     <div id="top-panel-ctn" class="panel-basic panel-border-b">
         <div id="hp-left">
-            <div id="hp-proj-name"><span id="hp-proj-b" class="span-wide">CHARTANIM</span>/ {{projectName}}</div>
+            <div id="hp-proj-name"><span id="hp-proj-b" class="span-wide">DummyD3 </span>/ {{projectName}}</div>
             
             <div id="hp-create-btn">
                 <button class="btn-basic span-wide">Create/Edit Your Data</button>
@@ -57,7 +57,6 @@ export default {
     margin: 0;
     font-size: 1.3em;
     font-weight: bold;
-    letter-spacing: .2em;
     color: $lgr;
     color: transparent;
     text-shadow:   0 0 1px $lgr, -1px -1px 1px $xdgrey, 1px 1px 1px $xlgrey;
