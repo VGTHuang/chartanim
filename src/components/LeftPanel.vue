@@ -4,14 +4,14 @@
         <div id="lp-main" v-show="lpShow" class="panel-basic">
             <div id="lp-main-ic">
                 <ul>
-                    <li v-for="(value, key) in lpOptions" :key="key" :class="{selected: value.selected}" @click="switchOptions(key)">
+                    <li v-for="(value, key) in lpOptions" :key="key" :class="{selected: editorParams.selectedLp===key}" @click="editorParams.selectedLp = key">
                         <img class="lp-option-img" :src="value.img">
                     </li>
                 </ul>
             </div>
             <div id="lp-main-bd" class="panel-basic panel-border-r">
                 <keep-alive>
-                    <component v-bind:is="lpCurrentPanel"></component>
+                    <component v-bind:is="lpOptions[editorParams.selectedLp].comp"></component>
                 </keep-alive>
             </div>
         </div>
@@ -20,21 +20,24 @@
 
 <script>
 import CanvasPanel from "./CanvasPanel.vue";
+import TablePanel from "./TablePanel.vue";
 import TestPanel from "./TestPanel.vue";
+import { mapState } from "vuex";
 
 export default {
     name: "LeftPanel",
     components: {
         CanvasPanel,
+        TablePanel,
         TestPanel
     },
     data: function() {
         return {
             lpToggleIcon: '◀',
             lpShow: true,
-            lpSelected: 0,
             lpOptions: {
-                "lp_option_data": {img: require("../assets/lp_option_elements.svg"), comp: "CanvasPanel", selected: true},
+                "lp_option_canvas": {img: require("../assets/lp_option_elements.svg"), comp: "CanvasPanel"},
+                "lp_option_table": {img: require("../assets/lp_option_grid.svg"), comp: "TablePanel"},
                 /*
                 "lp_option_elements": {img: require("../assets/lp_option_elements.svg"), comp: "TestPanel", selected: false},
                 "lp_option_grid": {img: require("../assets/lp_option_grid.svg"), comp: "TestPanel", selected: false},
@@ -42,8 +45,13 @@ export default {
                 "lp_option_export": {img: require("../assets/lp_option_export.svg"), comp: "TestPanel", selected: false}
                 */
             },
-            lpCurrentPanel: "CanvasPanel"
         }
+    },
+    computed: {
+        ...mapState({
+            editorParams: state => state.editorParams,
+        }),
+        
     },
     methods: {
         ccc: function() {
@@ -60,7 +68,6 @@ export default {
                 this.lpOptions[key].selected = false;
             }
             this.lpOptions[cur].selected = true;
-            this.lpCurrentPanel = this.lpOptions[cur].comp;
         }
     }
 }

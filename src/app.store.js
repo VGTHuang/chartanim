@@ -22,12 +22,9 @@ const store = new Vuex.Store({
             },
             background: {r: 240, g: 210, b: 230, a: 1}
         },
-        // general style
-        chartStyle: {},
-        // grid style
-        gridStyle: {},
-        // animation style
-        animStyle: {},
+        editorParams: {
+            selectedLp: "lp_option_canvas"
+        }
     },
     mutations: {
         setProjectName: (state, val) => {
