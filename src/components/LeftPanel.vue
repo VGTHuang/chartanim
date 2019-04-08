@@ -86,11 +86,12 @@ export default {
         ul {
             list-style: none;
             margin: 0;
-            padding:0;
+            padding: 0;
+            padding-top: 10px;
             height: 100%;
             background: $ddgrey;
             li {
-                margin: 10px 0 10px;
+                margin: 0px 0 10px;
                 height: 50px;
                 width: 50px;
                 box-sizing: border-box;

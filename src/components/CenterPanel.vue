@@ -1,7 +1,9 @@
 <template>
     <div id="center-panel">
         <div id="main-canvas" :style="setCanvasHeightWidth">
-            <div id="canvas-chart" @click="renewInterv">as</div>
+            <div id="canvas-chart" @click="renewMappedTsArr">
+                <div>{{currentValues}}</div>
+            </div>
             <div id="canvas-progress">
                 <div id="canvas-progress-ctrl">
                     <span id="canvas-progress-ctrl-b" class="canvas-progress-ctrl-btn">b</span>
@@ -11,12 +13,12 @@
                 <div id="canvas-progress-bar" @mouseenter="isOverBar=true" @mouseleave="isOverBar=false">
                     <div id="canvas-progress-bar-main" ref="progressbar" :style="setProgressBarWidth" @mouseover="mouseOverBarAction">
                         <div id="canvas-progress-bar-scrubber" :style="scrubberStyle"></div>
-                        <div class="fixed-timestamps"
-                            v-for="(interv, i) in tsInterv"
+                        <div class="key-timestamp"
+                            v-for="(mappedTs, i) in mappedTsArr"
                             :key="i"
-                            :style="{left: getBarPos(interv)}"
-                            @mouseover="timestampHover(getBarPos(interv), i)"
-                            @click="timestampClicked(getBarPos(interv))"></div>
+                            :style="{left: getBarPos(mappedTs)}"
+                            @mouseover="timestampHover(getBarPos(mappedTs), i)"
+                            @click="keyTsClicked(mappedTs, getBarPos(mappedTs))"></div>
                         <div id="canvas-progress-bar-tooltip" ref="tooltip" style="left: 0" v-show="isOverBar">{{tableParams.timestamps[tooltipIndex]}}</div>
                     </div>
                 </div>
@@ -27,21 +29,23 @@
 
 <script>
 import { mapState } from "vuex";
-import { algos } from "../assets/js/chart_algos.js";
+import { ChartMethods } from "../mixins/chart_methods.js";
 
 export default {
     name: "CenterPanel",
     data: function() {
         return {
-            tsInterv: [],
+            mappedTsArr: [],
             currentTimestampIndex: 0,
             isOverBar: false,
             scrubberStyle: {left: 0},
-            tooltipIndex: 0
+            tooltipIndex: 0,
+
+            currentValues: []
         }
     },
     created: function() {
-        this.renewInterv();
+        this.renewMappedTsArr();
     },
     computed: {
         ...mapState({
@@ -67,8 +71,8 @@ export default {
         }
     },
     methods: {
-        renewInterv: function() {
-            this.tsInterv = algos.getTimestampInterval(this.tableParams.timestamps);
+        renewMappedTsArr: function() {
+            this.mappedTsArr = ChartMethods.getTimestampInterval(this.tableParams.timestamps);
         },
         getBarPos: function(scaledPos) {
             return scaledPos*this.getProgressBarWidth+"px";
@@ -84,9 +88,11 @@ export default {
             this.$refs.tooltip.style.left = xPos;
             this.tooltipIndex = index;
         },
-        timestampClicked: function(xPos) {
+        keyTsClicked: function(mappedts, xPos) {
             // click timestamp, move scrubber to that position
             this.scrubberStyle = {left: xPos};
+            // change values
+            this.currentValues = ChartMethods.getValuesOfTimestamp(this.tableParams.contents, this.mappedTsArr, mappedts, "no", true);
         }
     }
 }
@@ -188,7 +194,7 @@ export default {
             border-color: #303030b0 transparent transparent transparent;
         }
     }
-    .fixed-timestamps {
+    .key-timestamp {
         height: 20px;
         width: 6px;
         margin-left: -3px;

@@ -36,7 +36,7 @@
 <script>
 import readXlsxFile from "read-excel-file";
 import DataTable from "../DataTable.vue";
-import {validateTable} from "../../assets/js/methods.js";
+import {validateTable} from "../../mixins/methods.js";
 
 export default {
     name: "DataEditorModal",

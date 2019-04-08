@@ -51,6 +51,7 @@ export default {
 #hp-proj-name {
     color: $lgr;
     margin-left: .5em;
+    white-space: nowrap;
 }
 #hp-proj-b {
     margin: 0;
@@ -63,5 +64,6 @@ export default {
 }
 .span-wide {
     margin: 0 10px;
+    white-space: nowrap;
 }
 </style>

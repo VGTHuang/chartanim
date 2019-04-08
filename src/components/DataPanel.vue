@@ -14,8 +14,8 @@
     <div class="msg-ctn">
         <div class="mt-basic msg-row">Table</div>
         <div class="msg-row msg-row-center">
-            <button class="btn-basic" @click="showSyntax()">syntax guidance</button>
-            <button class="btn-basic" @click="showDataEditor()">open data editor</button>
+            <button class="btn-basic btn-long" @click="showSyntax()">syntax guidance</button>
+            <button class="btn-basic btn-long" @click="showDataEditor()">open data editor</button>
         </div>
         <div class="msg-row msg-row-center">
             <DataTable :editable="false" :isTimestamped="isTimestamped"/>

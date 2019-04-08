@@ -72,11 +72,13 @@ export default {
     margin: 0 5px 0;
     border: 1px solid $xdgrey;
     border-radius: 3px;
-    height: 1.6em;
+    height: 1.8em;
     background-image: linear-gradient($mgrey, $dgrey);
     color: $xlgrey;
     text-shadow: -1px -1px 0 $dgrey;
     font-family: inherit;
+    font-size: .9em;
+    white-space: nowrap;
     &:hover {
         background-image: linear-gradient($dgrey, $xdgrey);
     }
@@ -84,6 +86,12 @@ export default {
         background-image: linear-gradient($dgrey, $xdgrey);
         color: $mgrey;
     }
+}
+.btn-long {
+    width: 150px;
+}
+.btn-short {
+    width: 50px;
 }
 //alert buttons; used with btn-basic
 .btn-alert {
