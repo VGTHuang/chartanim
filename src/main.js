@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import store from './app.store.js'
-import commonComponents from './components';
+import commonComponents from './components/common';
 
 Vue.config.productionTip = process.env.NODE_ENV === 'production'
 

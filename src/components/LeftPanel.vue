@@ -21,6 +21,7 @@
 <script>
 import CanvasPanel from "./CanvasPanel.vue";
 import TablePanel from "./TablePanel.vue";
+import ChartsPanel from "./ChartsPanel.vue";
 import TestPanel from "./TestPanel.vue";
 import { mapState } from "vuex";
 
@@ -29,15 +30,17 @@ export default {
     components: {
         CanvasPanel,
         TablePanel,
-        TestPanel
+        TestPanel,
+        ChartsPanel
     },
     data: function() {
         return {
             lpToggleIcon: '◀',
             lpShow: true,
             lpOptions: {
-                "lp_option_canvas": {img: require("../assets/lp_option_elements.svg"), comp: "CanvasPanel"},
-                "lp_option_table": {img: require("../assets/lp_option_grid.svg"), comp: "TablePanel"},
+                "lp_option_canvas": {img: require("@/assets/lp_option_elements.svg"), comp: "CanvasPanel"},
+                "lp_option_table": {img: require("@/assets/lp_option_grid.svg"), comp: "TablePanel"},
+                "lp_option_charts": {img: require("@/assets/lp_option_grid.svg"), comp: "ChartsPanel"},
                 /*
                 "lp_option_elements": {img: require("../assets/lp_option_elements.svg"), comp: "TestPanel", selected: false},
                 "lp_option_grid": {img: require("../assets/lp_option_grid.svg"), comp: "TestPanel", selected: false},
@@ -121,6 +124,16 @@ export default {
         height: 100%;
         width: 280px;
         padding: 0;
+        overflow-y: scroll;
+        position: relative;
+        &::-webkit-scrollbar {
+            position: absolute;
+            width: 10px;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: $ddgrey;
+        }
+        
     }
 }
 </style>

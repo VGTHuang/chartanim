@@ -1,46 +1,45 @@
 <template>
     <div class="msg-row msg-row-space-between col-ctn">
-        <div class="background" v-if="show" @click="closeColModal"></div>
         <label v-if="label !== undefined">{{label}}</label>
-        <div class="col-d" :style="{background: myval}" @click="showColModal">
-        </div>
-        <div class="col-dialog-box" v-if="show">
+        <div class="col-d" :style="{background: propVal}" @click="show=true">
+            <div class="col-dialog-box" v-if="show" @mouseleave="confirmChange">
                 <div class="col-dialog-box-row">
                     <div class="col-dialog-palette" v-for="(v,i) in palettes" :key="i" :style="{background: v}"></div>
                 </div>
                 <div class="col-dialog-box-row">
-                    <label>red</label>
-                    <input type="range" min="0" max="255" v-model="tempRGB.r"/>
-                    <input type="number" min="0" max="255" v-model="tempRGB.r"/>
+                    <label style="color: red">red</label>
+                    <input type="range" min="0" max="255" v-model="initRGB.r"/>
+                    <input type="number" min="0" max="255" v-model="initRGB.r"/>
                 </div>
                 <div class="col-dialog-box-row">
-                    <label>green</label>
-                    <input type="range" min="0" max="255" v-model="tempRGB.g"/>
-                    <input type="number" min="0" max="255" v-model="tempRGB.g"/>
+                    <label style="color: green">green</label>
+                    <input type="range" min="0" max="255" v-model="initRGB.g"/>
+                    <input type="number" min="0" max="255" v-model="initRGB.g"/>
                 </div>
                 <div class="col-dialog-box-row">
-                    <label>blue</label>
-                    <input type="range" min="0" max="255" v-model="tempRGB.b"/>
-                    <input type="number" min="0" max="255" v-model="tempRGB.b"/>
+                    <label style="color: blue">blue</label>
+                    <input type="range" min="0" max="255" v-model="initRGB.b"/>
+                    <input type="number" min="0" max="255" v-model="initRGB.b"/>
                 </div>
                 <div class="col-dialog-box-row">
                     <label>alpha</label>
-                    <input type="range" min="0" max="1" step="0.05" v-model="tempRGB.a">
-                    <input type="number" min="0" max="1" step="0.05" v-model="tempRGB.a"/>
+                    <input type="range" min="0" max="1" step="0.05" v-model="initRGB.a">
+                    <input type="number" min="0" max="1" step="0.05" v-model="initRGB.a"/>
                 </div>
                 <div class="col-dialog-box-row">
                     <div>
                         <div class="col-d" :style="{background: myval}"></div>
-                        <div class="col-d" :style="{background: tempval}"></div>
+                        <div class="col-d" :style="{background: propVal}"></div>
                     </div>
-                    <button class="btn-basic" @click="submitCol">OK</button>
+                    <button class="btn-basic" @click="cancelChange">cancel</button>
                 </div>
             </div>
+        </div>
     </div>
 </template>
 
 <script>
-import { rgbToString } from "../../mixins/methods.js";
+import { rgbToString } from "@/mixins/methods.js";
 import { mapState } from "vuex";
 
 export default {
@@ -52,43 +51,32 @@ export default {
         return {
             show: false,
             myRGB: {r: 0, g: 0, b: 0, a: 0},
-            tempRGB: {r: 0, g: 0, b: 0, a: 0},
-            myHSL: {}
         }
     },
     created: function() {
         [this.myRGB.r, this.myRGB.g, this.myRGB.b, this.myRGB.a] = [this.initRGB.r, this.initRGB.g, this.initRGB.b, this.initRGB.a];
-        [this.tempRGB.r, this.tempRGB.g, this.tempRGB.b, this.tempRGB.a] = [this.initRGB.r, this.initRGB.g, this.initRGB.b, this.initRGB.a];
     },
     computed: {
         ...mapState({
             palettes: state => state.editorParams.templatePalettes,
         }),
-        tempval: function() {
-            return rgbToString(this.tempRGB);
+        propVal: function() {
+            return rgbToString(this.initRGB);
         },
         myval: function() {
             return rgbToString(this.myRGB);
         }
     },
     methods: {
-        closeColModal: function() {
+        confirmChange: function() {
+            [this.myRGB.r, this.myRGB.g, this.myRGB.b, this.myRGB.a] = [this.initRGB.r, this.initRGB.g, this.initRGB.b, this.initRGB.a];
             this.show = false;
         },
-        showColModal: function() {
-            this.tempRGB.r = this.myRGB.r;
-            this.tempRGB.g = this.myRGB.g;
-            this.tempRGB.b = this.myRGB.b;
-            this.tempRGB.a = this.myRGB.a;
-            this.show = true;
-        },
-        submitCol: function() {
-            this.myRGB.r = this.tempRGB.r;
-            this.myRGB.g = this.tempRGB.g;
-            this.myRGB.b = this.tempRGB.b;
-            this.myRGB.a = this.tempRGB.a;
-            this.show = false;
-            this.$emit("changed", this.myRGB);
+        cancelChange: function() {
+            this.initRGB.r = this.myRGB.r;
+            this.initRGB.g = this.myRGB.g;
+            this.initRGB.b = this.myRGB.b;
+            this.initRGB.a = this.myRGB.a;
         }
     }
 }
@@ -107,22 +95,14 @@ export default {
     background: black;
     cursor: pointer;
 }
-.background {
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-    z-index: 400;
-}
 .col-dialog-box {
     display: block;
     position: absolute;
     top: 1.3em;
-    left:0;
+    right:0;
     padding: 10px;
     //min-height: 150px;
-    width: 300px;
+    width: 230px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -137,13 +117,13 @@ export default {
         justify-content: space-between;
         align-items: center;
         label {
-            width: 50px;
+            width: 30px;
         }
         input[type="range"] {
-            width: 130px;
+            width: 100px;
         }
         input[type="number"] {
-            width: 60px;
+            width: 50px;
             border: none;
         }
         .col-dialog-palette {
