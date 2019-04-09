@@ -23,7 +23,12 @@ const store = new Vuex.Store({
             background: {r: 240, g: 210, b: 230, a: 1}
         },
         editorParams: {
-            selectedLp: "lp_option_canvas"
+            selectedLp: "lp_option_canvas",
+            templatePalettes: [
+                {r: 255, g: 100, b: 0},
+                {r: 125, g: 100, b: 0},
+                {r: 255, g: 200, b: 50}
+            ]
         }
     },
     mutations: {

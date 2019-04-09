@@ -1,7 +1,7 @@
 <template>
     <div id="center-panel">
         <div id="main-canvas" :style="setCanvas">
-            
+            <BasicModal />
         </div>
     </div>
 </template>
@@ -36,7 +36,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "./scss/_variables.scss";
 
 #center-panel {
     flex: 1;

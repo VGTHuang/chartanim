@@ -32,7 +32,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "./scss/_variables.scss";
 
 #top-panel-ctn {
     position: relative;
@@ -58,8 +57,8 @@ export default {
     font-size: 1.3em;
     font-weight: bold;
     color: $lgr;
-    color: transparent;
-    text-shadow:   0 0 1px $lgr, -1px -1px 1px $xdgrey, 1px 1px 1px $xlgrey;
+
+    //color: red;
 }
 .span-wide {
     margin: 0 10px;

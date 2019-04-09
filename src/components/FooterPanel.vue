@@ -13,7 +13,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "./scss/_variables.scss";
 
 #footer-panel-ctn {
     width: 100%;

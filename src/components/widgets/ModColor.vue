@@ -3,10 +3,11 @@
         <div class="background" v-if="show" @click="closeColModal"></div>
         <label v-if="label !== undefined">{{label}}</label>
         <div class="col-d" :style="{background: myval}" @click="showColModal">
-            
-            
         </div>
         <div class="col-dialog-box" v-if="show">
+                <div class="col-dialog-box-row">
+                    <div class="col-dialog-palette" v-for="(v,i) in palettes" :key="i" :style="{background: v}"></div>
+                </div>
                 <div class="col-dialog-box-row">
                     <label>red</label>
                     <input type="range" min="0" max="255" v-model="tempRGB.r"/>
@@ -20,7 +21,7 @@
                 <div class="col-dialog-box-row">
                     <label>blue</label>
                     <input type="range" min="0" max="255" v-model="tempRGB.b"/>
-                    <input type="number" v-model="tempRGB.b"/>
+                    <input type="number" min="0" max="255" v-model="tempRGB.b"/>
                 </div>
                 <div class="col-dialog-box-row">
                     <label>alpha</label>
@@ -40,6 +41,7 @@
 
 <script>
 import { rgbToString } from "../../mixins/methods.js";
+import { mapState } from "vuex";
 
 export default {
     props: {
@@ -59,6 +61,9 @@ export default {
         [this.tempRGB.r, this.tempRGB.g, this.tempRGB.b, this.tempRGB.a] = [this.initRGB.r, this.initRGB.g, this.initRGB.b, this.initRGB.a];
     },
     computed: {
+        ...mapState({
+            palettes: state => state.editorParams.templatePalettes,
+        }),
         tempval: function() {
             return rgbToString(this.tempRGB);
         },
@@ -71,6 +76,10 @@ export default {
             this.show = false;
         },
         showColModal: function() {
+            this.tempRGB.r = this.myRGB.r;
+            this.tempRGB.g = this.myRGB.g;
+            this.tempRGB.b = this.myRGB.b;
+            this.tempRGB.a = this.myRGB.a;
             this.show = true;
         },
         submitCol: function() {
@@ -86,7 +95,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../scss/_variables.scss";
 
 .col-ctn {
     position: relative;
@@ -112,7 +120,8 @@ export default {
     position: absolute;
     top: 1.3em;
     left:0;
-    height: 150px;
+    padding: 10px;
+    //min-height: 150px;
     width: 300px;
     display: flex;
     flex-direction: column;
@@ -123,7 +132,7 @@ export default {
     z-index: 500;
     cursor: default;
     .col-dialog-box-row {
-        width: 90%;
+        width: 100%;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -136,6 +145,11 @@ export default {
         input[type="number"] {
             width: 60px;
             border: none;
+        }
+        .col-dialog-palette {
+            height: 10px;
+            width: 10px;
+            border: 1px solid black;
         }
     }
 }
