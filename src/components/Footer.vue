@@ -6,9 +6,7 @@
 
 <script>
 export default {
-    name: "HeaderPanel",
-    components: {
-    }
+    name: "Footer",
 }
 </script>
 

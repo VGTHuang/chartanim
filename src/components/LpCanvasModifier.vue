@@ -1,5 +1,5 @@
 <template>
-<div id="test-panel">
+<div id="lp-canvas-modifier">
     <div class="msg-ctn">
         <div class="lt-basic msg-row">canvas panel</div>
     </div>
@@ -19,6 +19,7 @@
 import { mapState } from "vuex";
 
 export default {
+    name: "LpCanvasModifier",
     data: function() {
         return {
             cw: {init: 600, min: 100, max: 5000},

@@ -1,7 +1,9 @@
 <template>
-    <div class="chart-container" :style="ctnStyle">
-        <div>key of this chart is: {{chartKey}}</div>
-        <slot />
+    <div class="chart-container" :class="{chartselected: isSelected}">
+        <div style="font-size: .8em; color: #606060">key of this chart is: {{chartKey}}</div>
+        <div ref="chartBody">
+            asdasd
+        </div>
         <div class="ctrl-group">
             <span @click="selectEditorPanel">edit</span>
             <span>move</span>
@@ -10,39 +12,52 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
     props: {
         chartKey: String
     },
     data: function() {
         return {
-            mychart: {}
+            myChart: {},
+            myChartBodyRef: ""
+        }
+    },
+    computed: {
+        ...mapState({
+            canvasParams: state => state.canvasParams,
+            chartList: state => state.chartList,
+            editorParams: state => state.editorParams,
+        }),
+        bgcolor() {
+            return rgbToString(this.canvasParams.background);
+        },
+        isSelected() {
+            return this.editorParams.selectedLp === this.chartKey;
         }
     },
     created: function() {
-        this.mychart = this.$store.state.chartList[this.chartKey];
+        this.myChart = this.chartList[this.chartKey]?this.chartList[this.chartKey]:{};
+        this.myChartBodyRef = "ref"+this.chartKey;
+        
     },
-    computed: {
-        ctnStyle() {
-            return {
-                top: this.mychart.top+'px',
-                left: this.mychart.left+'px',
-                height: this.mychart.height+'px',
-                width: this.mychart.width+'px',
-            }
-        }
+    mounted: function() {
+        this.$refs.chartBody.innerHTML = "qwe";
+        this.myChart.draw(this.$refs.chartBody, this.myChart.values);
     },
     methods: {
         selectEditorPanel() {
-            console.log(this.chartKey);
+            // console.log(this.chartKey);
+            this.editorParams.selectedLp = this.chartKey;
         }
     }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .chart-container {
-    position: absolute;
+    position: relative;
     .ctrl-group {
         visibility: hidden;
         position: absolute;
@@ -70,5 +85,10 @@ export default {
         }
     }
 }
-
+.chartselected {
+    outline: 1px dotted #808080;
+    .ctrl-group {
+        visibility: visible;
+    }
+}
 </style>

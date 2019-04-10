@@ -1,5 +1,5 @@
 <template>
-<div id="table-panel">
+<div id="lp-table-modifier">
     <div class="msg-ctn">
         <div class="lt-basic msg-row">table panel</div>
     </div>
@@ -10,7 +10,7 @@
 import { mapState } from "vuex";
 
 export default {
-    name: "TablePanel",
+    name: "LpTableModifier",
     data: function() {
         return {
             

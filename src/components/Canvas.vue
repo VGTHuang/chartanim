@@ -4,7 +4,7 @@
                                         width: canvasParams.layout.canvasWidth+'px',
                                         background: bgcolor
                                     }">
-            <ChartContainer v-for="(value, key) in chartList" :key="key" :chartKey="key">thingsintheslot</ChartContainer>
+            <ChartContainer v-for="(value, key) in chartList" :key="key" :chartKey="key" />
         </div>
     </div>
 </template>
@@ -14,7 +14,7 @@ import { mapState } from "vuex";
 import { rgbToString } from "@/mixins/methods.js";
 
 export default {
-    name: "CenterPanel",
+    name: "Canvas",
     data: function() {
         return {
         }
@@ -23,13 +23,14 @@ export default {
         ...mapState({
             canvasParams: state => state.canvasParams,
             chartList: state => state.chartList,
+            editorParams: state => state.editorParams,
         }),
         bgcolor() {
             return rgbToString(this.canvasParams.background);
         }
     },
     created: function() {
-    }
+    },
 }
 </script>
 

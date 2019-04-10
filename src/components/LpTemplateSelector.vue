@@ -1,10 +1,10 @@
 <template>
-<div id="table-panel">
+<div id="lp-template-selector">
     <div class="msg-ctn">
-        <div class="lt-basic msg-row">charts panel</div>
+        <div class="lt-basic msg-row">template selector</div>
     </div>
     <div class="msg-ctn">
-        <div class="mt-basic msg-row">static charts</div>
+        <div class="mt-basic msg-row">static chart templates</div>
         <div class="msg-row charts-ctn">
             
             <div class="chart-c" v-for="(v, k) in localc" :key="k" :title="v.name" @click="showChartInfo(k)">
@@ -33,7 +33,7 @@ import { mapState } from "vuex";
 import { localCharts, loadCharts } from "@/assets/charts";
 
 export default {
-    name: "ChartsPanel",
+    name: "LpTemplateSelector",
     data: function() {
         return {
             localc: localCharts,
@@ -74,9 +74,10 @@ export default {
             while(this.chartList[randstr]) {
                 randstr = makeid(5);
             }
-
-            this.chartList[randstr] = this.chosenChart;
-            console.log(this.chartList);
+            this.$set(this.chartList, randstr, this.chosenChart);
+            //this.chartList[randstr] = this.chosenChart;
+            this.$emit("newChartAdded", randstr);
+            // console.log(this.chartList);
         }
     }
 }

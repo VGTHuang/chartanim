@@ -1,34 +1,29 @@
 <template>
     <div id="chart-editor-wrapper">
         <div id="panels-canvas-wrapper">
-            <HeaderPanel />
+            <Header />
             <main id="chart-editor-main">
                 <LeftPanel />
-                <CenterPanel />
+                <Canvas />
             </main>
-            <FooterPanel>footer</FooterPanel>
+            <Footer />
         </div>
     </div>
 </template>
 
 <script>
-import HeaderPanel from "./HeaderPanel.vue";
+import Header from "./Header.vue";
 import LeftPanel from "./LeftPanel.vue";
-import FooterPanel from "./FooterPanel.vue";
-import CenterPanel from "./CenterPanel.vue";
+import Footer from "./Footer.vue";
+import Canvas from "./Canvas.vue";
 
 export default {
     components: {
-        HeaderPanel,
+        Header,
         LeftPanel,
-        CenterPanel,
-        FooterPanel
+        Canvas,
+        Footer
     },
-    
-    data: function() {
-        return {
-        }
-    }
 }
 </script>
 
@@ -110,6 +105,7 @@ export default {
     // a single row of message
     .msg-row {
         margin: 8px 0;
+        overflow-wrap: break-word;
     }
     .msg-row-center {
         display: flex;

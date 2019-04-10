@@ -1,18 +1,9 @@
 <template>
-    <div id="top-panel-ctn" class="panel-basic panel-border-b">
-        <div id="hp-left">
-            <div id="hp-proj-name"><span id="hp-proj-b" class="span-wide">DummyD3 </span>/ {{projectName}}</div>
-            
-            <div id="hp-create-btn">
-                <button class="btn-basic span-wide">Create/Edit Your Data</button>
-            </div>
-            <div><span class="msg-basic span-wide">OR</span></div>
-            <div id="hp-upload-btn">
-                <button class="btn-basic span-wide">Import Local File</button>
-                <span class="msg-basic">File path here</span>
-            </div>
+    <div id="header-ctn" class="panel-basic panel-border-b">
+        <div id="header-left">
+            <div id="header-project-name"><span id="header-project-app-name" class="span-wide">DummyD3 </span>/ {{projectName}}</div>
         </div>
-        <div id="hp-right">
+        <div id="header-right">
             <div class="msg-basic msg-s span-wide"><i>VGTHuang on GitHub</i></div>
         </div>
     </div>
@@ -22,7 +13,7 @@
 import { mapState } from "vuex";
 
 export default {
-    name: "HeaderPanel",
+    name: "Header",
     computed: {
         ...mapState({
             projectName: state => state.projectName
@@ -33,7 +24,7 @@ export default {
 
 <style lang="scss" scoped>
 
-#top-panel-ctn {
+#header-ctn {
     position: relative;
     width:100%;
     height: 2.5em;
@@ -42,17 +33,17 @@ export default {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    #hp-left {
+    #header-left {
         display: flex;
         align-items: center;
     }
 }
-#hp-proj-name {
+#header-project-name {
     color: $lgr;
     margin-left: .5em;
     white-space: nowrap;
 }
-#hp-proj-b {
+#header-project-app-name {
     margin: 0;
     font-size: 1.3em;
     font-weight: bold;

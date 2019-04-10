@@ -2,59 +2,62 @@
     <div id="left-panel-ctn" class="panel-basic">
         <div id="lp-toggle-bar" class="panel-basic panel-border-r" @click="ccc">{{lpToggleIcon}}</div>
         <div id="lp-main" v-show="lpShow" class="panel-basic">
-            <div id="lp-main-ic">
+            <div id="lp-main-tabs">
                 <ul>
                     <li v-for="(value, key) in lpOptions" :key="key" :class="{selected: editorParams.selectedLp===key}" @click="editorParams.selectedLp = key">
                         <img class="lp-option-img" :src="value.img">
                     </li>
                 </ul>
+                
             </div>
-            <div id="lp-main-bd" class="panel-basic panel-border-r">
-                <keep-alive>
-                    <component v-bind:is="lpOptions[editorParams.selectedLp].comp"></component>
-                </keep-alive>
+            <div id="lp-main-bd" class="panel-basic panel-border-r" ref="lpMainBody">
+                <LpCanvasModifier v-show="editorParams.selectedLp==='LpCanvasModifier'"/>
+                <LpTemplateSelector v-show="editorParams.selectedLp==='LpTemplateSelector'" @newChartAdded="addChartToLeftPanel"/>
+                <LpTemplateModifier
+                    v-for="(v, k) in chartList"
+                    :key="k"
+                    :chartKey="k"
+                />
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import CanvasPanel from "./CanvasPanel.vue";
-import TablePanel from "./TablePanel.vue";
-import ChartsPanel from "./ChartsPanel.vue";
-import TestPanel from "./TestPanel.vue";
+import LpCanvasModifier from "./LpCanvasModifier.vue";
+import LpTableModifier from "./LpTableModifier.vue";
+import LpTemplateSelector from "./LpTemplateSelector.vue";
+import LpTemplateModifier from "./LpTemplateModifier.vue";
+import LpTest from "./LpTest.vue";
 import { mapState } from "vuex";
+import Vue from "vue";
+
+var DynamicTempModClass = Vue.extend(LpTemplateModifier);
 
 export default {
     name: "LeftPanel",
     components: {
-        CanvasPanel,
-        TablePanel,
-        TestPanel,
-        ChartsPanel
+        LpCanvasModifier,
+        LpTableModifier,
+        LpTemplateSelector,
+        LpTemplateModifier,
+        LpTest
     },
     data: function() {
         return {
             lpToggleIcon: '◀',
             lpShow: true,
             lpOptions: {
-                "lp_option_canvas": {img: require("@/assets/lp_option_elements.svg"), comp: "CanvasPanel"},
-                "lp_option_table": {img: require("@/assets/lp_option_grid.svg"), comp: "TablePanel"},
-                "lp_option_charts": {img: require("@/assets/lp_option_grid.svg"), comp: "ChartsPanel"},
-                /*
-                "lp_option_elements": {img: require("../assets/lp_option_elements.svg"), comp: "TestPanel", selected: false},
-                "lp_option_grid": {img: require("../assets/lp_option_grid.svg"), comp: "TestPanel", selected: false},
-                "lp_option_animation": {img: require("../assets/lp_option_animation.svg"), comp: "TestPanel", selected: false},
-                "lp_option_export": {img: require("../assets/lp_option_export.svg"), comp: "TestPanel", selected: false}
-                */
+                "LpCanvasModifier": {img: require("@/assets/lp_option_elements.svg"), comp: "LpCanvasModifier"},
+                "LpTemplateSelector": {img: require("@/assets/lp_option_grid.svg"), comp: "LpTemplateSelector"},
             },
         }
     },
     computed: {
         ...mapState({
+            chartList: state => state.chartList,
             editorParams: state => state.editorParams,
         }),
-        
     },
     methods: {
         ccc: function() {
@@ -66,11 +69,14 @@ export default {
             }
             this.lpShow = !this.lpShow;
         },
-        switchOptions: function(cur) {
-            for(var key in this.lpOptions) {
-                this.lpOptions[key].selected = false;
-            }
-            this.lpOptions[cur].selected = true;
+        addChartToLeftPanel: function(chartKey) {
+            // console.log(chartKey);
+            this.$set(this.lpOptions, chartKey, {
+                img: this.chartList[chartKey].info.thumbnail,
+                comp: "LpTemplateModifier"
+            });
+
+            //this.$refs.lpMainBody.innerHTML += `<LpTemplateModifier :key=${chartKey} v-if="editorParams.selectedLp===${chartKey}" />`;
         }
     }
 }
@@ -93,14 +99,13 @@ export default {
 }
 #lp-main {
     display: flex;
-    #lp-main-ic {
+    #lp-main-tabs {
+        background: $ddgrey;
         ul {
             list-style: none;
             margin: 0;
             padding: 0;
             padding-top: 10px;
-            height: 100%;
-            background: $ddgrey;
             li {
                 margin: 0px 0 10px;
                 height: 50px;
