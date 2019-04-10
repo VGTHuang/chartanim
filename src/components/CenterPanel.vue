@@ -12,13 +12,11 @@
 <script>
 import { mapState } from "vuex";
 import { rgbToString } from "@/mixins/methods.js";
-import test from "./charts";
 
 export default {
     name: "CenterPanel",
     data: function() {
         return {
-            myt: test
         }
     },
     computed: {
@@ -31,7 +29,6 @@ export default {
         }
     },
     created: function() {
-        console.log(this.myt);
     }
 }
 </script>

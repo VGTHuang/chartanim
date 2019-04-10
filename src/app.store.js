@@ -8,13 +8,7 @@ const store = new Vuex.Store({
         projectName: "Project 1",
         // spreadsheet data in given format
         chartList: {
-            "5dg7sV3I": {
-                height: 100,
-                width: 200,
-                top: 10,
-                left: 10,
-                name: "Test chart"
-            }
+            
         },
         _templateChartListExample: {
             "5dg7sV3I": {

@@ -1,31 +1,25 @@
 <template>
-    <div v-show="show">
-        <div class="background" @click="hideModal">
-        </div>
-        <div class="modal">
-            <slot />
+    <div>
+        <div class="background">
+            <div class="modal">
+                <slot />
+            </div>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    data: function() {
-        return {
-            show: true
-        }
-    },
-    methods: {
-        hideModal() {
-            this.show = false;
-        }
-    }
+    
 }
 </script>
 
 
 <style lang="scss" scoped>
 .background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: $dgrey;
     background: #00000040;
     position: fixed;
@@ -36,12 +30,9 @@ export default {
     z-index: 1000;
 }
 .modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    height: 100px;
-    width: 100px;
-    background: $mgrey;
+    min-height: 100px;
+    min-width: 100px;
+    background: $dgrey;
     z-index: 2000;
 }
 </style>

@@ -6,41 +6,78 @@
     <div class="msg-ctn">
         <div class="mt-basic msg-row">static charts</div>
         <div class="msg-row charts-ctn">
-            <div class="chart-c">
-                <div>img</div>
-                <label>chart nasdfgsdfsdfme</label>
+            
+            <div class="chart-c" v-for="(v, k) in localc" :key="k" :title="v.name" @click="showChartInfo(k)">
+                <div><img :src="v.thumbnail" height="50px"></div>
+                <label>{{v.name}}</label>
             </div>
-            <div class="chart-c">
-                <div>img</div>
-                <label>chart name</label>
-            </div>
-            <div class="chart-c">
-                <div>img</div>
-                <label>chart name</label>
-            </div>
+
         </div>
     </div>
+    <BasicModal v-if="modalTrigger">
+        <div class="msg-ctn">
+            <div class="lt-basic msg-row">{{chosenChart && chosenChart.info.name?chosenChart.info.name:"Sorry"}}</div>
+            <div class="msg-basic msg-row" :class="{'msg-alert': !chosenChart}">{{chosenChart && chosenChart.info.description?chosenChart.info.description:"This template in unavailable at the moment"}}</div>
+            <div class="msg-basic msg-s msg-row" v-if="chosenChart"><i>By {{chosenChart && chosenChart.info.author?chosenChart.info.author:""}}</i></div>
+        </div>
+        <div class="msg-ctn">
+            <button class="btn-basic" @click="applyChart" :disabled="!chosenChart">apply</button>
+            <button class="btn-basic" @click="modalTrigger=false">close</button>
+        </div>
+    </BasicModal>
 </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
+import { localCharts, loadCharts } from "@/assets/charts";
 
 export default {
     name: "ChartsPanel",
     data: function() {
         return {
-            
+            localc: localCharts,
+            modalTrigger: false,
+            chosenChart: {}
         }
+    },
+    created: function() {
     },
     computed: {
         ...mapState({
-            
+            chartList: state => state.chartList
         }),
-        
     },
     methods: {
-        
+        showChartInfo(c) {
+            loadCharts(c).then(modulejs => {
+                this.chosenChart = modulejs;
+                this.modalTrigger = true;
+            }).catch(() => {
+                this.modalTrigger = true;
+                this.chosenChart = null
+            });
+        },
+        applyChart() {
+            this.modalTrigger = false;
+
+            // generate random string for chart
+            function makeid(length) {
+                var text = "";
+                var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                for (var i = 0; i < length; i++)
+                    text += possible.charAt(Math.floor(Math.random() * possible.length));
+                return text;
+            }
+
+            var randstr = makeid(5);
+            while(this.chartList[randstr]) {
+                randstr = makeid(5);
+            }
+
+            this.chartList[randstr] = this.chosenChart;
+            console.log(this.chartList);
+        }
     }
 }
 </script>
@@ -55,19 +92,21 @@ export default {
         height: 120px;
         width: 120px;
         box-sizing: border-box;
-        background: green;
         margin-bottom: 15px;
+        &:hover {
+            outline: 2px solid $lgrey;
+        }
         div {
             height: 100px;
             width: 120px;
             clear: both;
-            background: url("../assets/charts-thumbnail.jpg") no-repeat;
+            background: $mgrey;
         }
         label {
             display: block;
             height: 20px;
             width: 120px;
-            background: red;
+            font-size: .9em;
             text-align: center;
             text-overflow: ellipsis;
             overflow: hidden;
