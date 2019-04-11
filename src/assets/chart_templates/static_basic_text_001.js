@@ -31,7 +31,7 @@ var info = {
 }
 
 var values = {
-    textContent: "Sample tedxt",
+    textContent: "Sample text",
     //textSize: 16,
     //textColor: {r: 255, g: 0, b: 0}
 };

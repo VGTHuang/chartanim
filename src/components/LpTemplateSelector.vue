@@ -54,7 +54,7 @@ export default {
                 this.chosenChart = modulejs;
                 this.modalTrigger = true;
             }).catch(() => {
-                console.log("not loaded");
+                // console.log("not loaded");
                 this.modalTrigger = true;
                 this.chosenChart = null
             });

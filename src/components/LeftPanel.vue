@@ -32,8 +32,6 @@ import LpTest from "./LpTest.vue";
 import { mapState } from "vuex";
 import Vue from "vue";
 
-var DynamicTempModClass = Vue.extend(LpTemplateModifier);
-
 export default {
     name: "LeftPanel",
     components: {
