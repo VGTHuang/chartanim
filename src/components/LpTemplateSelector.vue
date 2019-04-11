@@ -17,7 +17,7 @@
     <BasicModal v-if="modalTrigger">
         <div class="msg-ctn">
             <div class="lt-basic msg-row">{{chosenChart && chosenChart.info.name?chosenChart.info.name:"Sorry"}}</div>
-            <div class="msg-basic msg-row" :class="{'msg-alert': !chosenChart}">{{chosenChart && chosenChart.info.description?chosenChart.info.description:"This template in unavailable at the moment"}}</div>
+            <div class="msg-basic msg-row" :class="{'msg-alert': !chosenChart}">{{chosenChart && chosenChart.info.description?chosenChart.info.description:"This template is unavailable at the moment"}}</div>
             <div class="msg-basic msg-s msg-row" v-if="chosenChart"><i>By {{chosenChart && chosenChart.info.author?chosenChart.info.author:""}}</i></div>
         </div>
         <div class="msg-ctn">
@@ -30,7 +30,7 @@
 
 <script>
 import { mapState } from "vuex";
-import { localCharts, loadCharts } from "@/assets/charts";
+import { localCharts, loadCharts } from "@/assets/chart_templates";
 
 export default {
     name: "LpTemplateSelector",
@@ -54,6 +54,7 @@ export default {
                 this.chosenChart = modulejs;
                 this.modalTrigger = true;
             }).catch(() => {
+                console.log("not loaded");
                 this.modalTrigger = true;
                 this.chosenChart = null
             });
@@ -114,9 +115,5 @@ export default {
             white-space: nowrap;
         }
     }
-}
-
-.sprite {
-    background: url("../assets/charts-thumbnail.jpg") no-repeat;
 }
 </style>

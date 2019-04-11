@@ -31,21 +31,24 @@ var info = {
 }
 
 var values = {
-    textContent: "Sample text",
+    textContent: "Sample tedxt",
     //textSize: 16,
     //textColor: {r: 255, g: 0, b: 0}
 };
 
-var panel = {
+var panel = function(values) {
     /**
-     * contents that will be displayed in left panel
+     * contents that will be displayed in left panel.
+     * Type: info text color number range select ...
      */
-    block1: [
-        {type: "Info", text: "This is how you mutate text"},
-        {type: "Text", value: "textContent"},
-    ]
+    return {
+        "General settings": [
+            {type: "text", value: values.textContent}
+        ],
+        "Other information": [
+        ]
+    }
 }
-
 
 var draw = function(box, values) {
     // console.log(v.muval1);

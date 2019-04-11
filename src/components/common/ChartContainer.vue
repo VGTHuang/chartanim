@@ -21,6 +21,7 @@ export default {
     data: function() {
         return {
             myChart: {},
+            myData: {},
             myChartBodyRef: ""
         }
     },
@@ -30,21 +31,24 @@ export default {
             chartList: state => state.chartList,
             editorParams: state => state.editorParams,
         }),
-        bgcolor() {
-            return rgbToString(this.canvasParams.background);
-        },
         isSelected() {
             return this.editorParams.selectedLp === this.chartKey;
-        }
+        },
     },
     created: function() {
         this.myChart = this.chartList[this.chartKey]?this.chartList[this.chartKey]:{};
+        this.myData =  this.chartList[this.chartKey]?this.chartList[this.chartKey].values:{};
         this.myChartBodyRef = "ref"+this.chartKey;
         
     },
     mounted: function() {
-        this.$refs.chartBody.innerHTML = "qwe";
         this.myChart.draw(this.$refs.chartBody, this.myChart.values);
+        // this.myData = this.myChart.values.textContent;
+    },
+    watch: {
+        myData: function() {
+            this.myChart.draw(this.$refs.chartBody, this.myChart.values);
+        }
     },
     methods: {
         selectEditorPanel() {
