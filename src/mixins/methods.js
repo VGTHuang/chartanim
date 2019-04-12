@@ -1,10 +1,7 @@
-function rgbToString(rgbobj) {
+function rgbToString(rgb) {
     // rgbobj = { r: <val>, g: <val>, b: <val> } or { r: <val>, g: <val>, b: <val>, a: <val> }
-    return `rgb(${rgbobj.r},${rgbobj.g},${rgbobj.b}${(rgbobj.a&&rgbobj.a!=1)?','+rgbobj.a:""})`;
+    return `rgb(${rgb[0]},${rgb[1]},${rgb[2]}${rgb[3]<1?','+rgb[3]:""})`;
 }
 
-function stringToRgb(str) {
-    var res = new RegExp(/^rgb\(\)$/).exec(str);
-}
 
 export {rgbToString};

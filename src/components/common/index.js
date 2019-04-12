@@ -1,11 +1,10 @@
-import BasicModal from "./BasicModal.vue";
-import CtrlColor from "./CtrlColor.vue";
-import CtrlNumber from "./CtrlNumber.vue";
-import ChartContainer from "./ChartContainer.vue";
+import TextEditor from "./TextEditor.vue";
+import NumberEditor from "./NumberEditor.vue";
+import ColorEditor from "./ColorEditor.vue";
+
 
 export default {
-    BasicModal,
-    CtrlColor,
-    CtrlNumber,
-    ChartContainer
+    TextEditor,
+    NumberEditor,
+    ColorEditor
 }

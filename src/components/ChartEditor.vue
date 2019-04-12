@@ -1,28 +1,21 @@
 <template>
     <div id="chart-editor-wrapper">
-        <div id="panels-canvas-wrapper">
-            <Header />
-            <main id="chart-editor-main">
-                <LeftPanel />
-                <Canvas />
-            </main>
-            <Footer />
-        </div>
+            <EHeader />
+            <EBody />
+            <EFooter />
     </div>
 </template>
 
 <script>
-import Header from "./Header.vue";
-import LeftPanel from "./LeftPanel.vue";
-import Footer from "./Footer.vue";
-import Canvas from "./Canvas.vue";
+import EHeader from "./EHeader.vue";
+import EBody from "./EBody.vue";
+import EFooter from "./EFooter.vue";
 
 export default {
     components: {
-        Header,
-        LeftPanel,
-        Canvas,
-        Footer
+        EHeader,
+        EBody,
+        EFooter
     },
 }
 </script>
@@ -33,18 +26,8 @@ export default {
     overflow: visible;
     height: 100%;
     min-height: 100%;
-}
-#panels-canvas-wrapper {
-    position: relative;
-    margin: 0 auto;
-    height: 100%;
     display: flex;
     flex-direction: column;
-}
-#chart-editor-main {
-    flex: 1;
-    background: $ddgrey;
-    display: flex;
 }
 
 // *****************  general styles  *******************

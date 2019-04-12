@@ -1,5 +1,5 @@
 <template>
-    <div id="header-ctn" class="panel-basic panel-border-b">
+    <div id="header-container" class="panel-basic panel-border-b">
         <div id="header-left">
             <div id="header-project-name"><span id="header-project-app-name" class="span-wide">DummyD3 </span>/ {{projectName}}</div>
         </div>
@@ -13,18 +13,18 @@
 import { mapState } from "vuex";
 
 export default {
-    name: "Header",
+    name: "EHeader",
     computed: {
         ...mapState({
-            projectName: state => state.projectName
-        }),
+            projectName: state => state.projectParams.projectName
+        })
     }
 }
 </script>
 
 <style lang="scss" scoped>
 
-#header-ctn {
+#header-container {
     position: relative;
     width:100%;
     height: 2.5em;
