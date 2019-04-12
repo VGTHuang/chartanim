@@ -5,6 +5,9 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state: {
+        chartParams: {
+
+        },
         projectParams: {
             selectedPanel: "project",
             projectName: "Project 1",

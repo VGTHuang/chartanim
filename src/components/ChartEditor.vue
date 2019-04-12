@@ -1,8 +1,8 @@
 <template>
     <div id="chart-editor-wrapper">
-            <EHeader />
-            <EBody />
-            <EFooter />
+            <e-header />
+            <e-body />
+            <e-footer />
     </div>
 </template>
 

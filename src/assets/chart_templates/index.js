@@ -29,7 +29,7 @@ var localCharts = {
 
 // dynamic load
 var loadCharts = (chartName) => {
-    return import(`@/assets/chart_templates/${chartName}.js`)
+    return import(`./${chartName}.js`)
 }
 
 export { localCharts, loadCharts }

@@ -1,7 +1,7 @@
 <template>
     <div class="chart-container" :class="{chartselected: isSelected}">
         <div style="font-size: .8em; color: #606060">key of this chart is: {{chartKey}}</div>
-        <div ref="chartBody">
+        <div>
             asdasd
         </div>
         <div class="ctrl-group">
@@ -20,40 +20,21 @@ export default {
     },
     data: function() {
         return {
-            myChart: {},
-            myData: {},
             myChartBodyRef: ""
         }
     },
     computed: {
         ...mapState({
-            canvasParams: state => state.canvasParams,
-            chartList: state => state.chartList,
-            editorParams: state => state.editorParams,
+
         }),
         isSelected() {
-            return this.editorParams.selectedLp === this.chartKey;
+            return this.$store.getters.selectedPanel === this.chartKey;
         },
-    },
-    created: function() {
-        this.myChart = this.chartList[this.chartKey]?this.chartList[this.chartKey]:{};
-        this.myData =  this.chartList[this.chartKey]?this.chartList[this.chartKey].values:{};
-        this.myChartBodyRef = "ref"+this.chartKey;
-        
-    },
-    mounted: function() {
-        this.myChart.draw(this.$refs.chartBody, this.myChart.values);
-        // this.myData = this.myChart.values.textContent;
-    },
-    watch: {
-        myData: function() {
-            this.myChart.draw(this.$refs.chartBody, this.myChart.values);
-        }
     },
     methods: {
         selectEditorPanel() {
-            // console.log(this.chartKey);
-            this.editorParams.selectedLp = this.chartKey;
+            console.log(this.chartKey);
+            this.$store.commit('switchPanel', this.myChart)
         }
     }
 }
